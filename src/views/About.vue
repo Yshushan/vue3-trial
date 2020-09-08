@@ -31,6 +31,7 @@ export default {
     return {
       msg,
       reverse,
+      text,
       textStats
     };
   }
