@@ -1,14 +1,14 @@
 <template>
   <div class="about">
     <h1>{{ msg }}</h1>
-    <h2>{{ new Date().toLocaleString() }}</h2>
-    <h2>{{ Math.max(1, 23, 4) }}</h2>
     <button @click="reverse">reverse</button>
+    <p><input type="text" v-model="text" /></p>
+    <p>{{ textStats }}</p>
   </div>
 </template>
 
 <script>
-import { ref } from "vue";
+import { ref, computed, watchEffect } from "vue";
 export default {
   setup() {
     const msg = ref("Vue3 trial");
@@ -18,9 +18,20 @@ export default {
         .reverse()
         .join("");
     };
+
+    const text = ref("");
+    const textStats = computed(() => {
+      return `"${text.value}": ${text.value.length}`;
+    });
+
+    watchEffect(() => {
+      console.log(textStats.value);
+    });
+
     return {
       msg,
-      reverse
+      reverse,
+      textStats
     };
   }
 };
